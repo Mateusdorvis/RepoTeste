@@ -1,6 +1,20 @@
 import sqlite3
 import bcrypt 
 from datetime import datetime
+import time
+import sys
+def carregamento():
+	sequencias = ["\\", "/", "-", "|"]
+	for i in range(10):
+		for s in sequencias:
+			sys.stdout.write(f"   {s}\r ")
+			sys.stdout.flush()
+			time.sleep(0.1)
+
+def loadingLogo():
+	with open("art.txt", "r") as art:
+		logo = art.read()
+	return logo
 
 def showDate():
 	date =  datetime.now().replace(microsecond=0)
@@ -8,7 +22,7 @@ def showDate():
 #cores ANSI
 vermelho = "\u001B[31m"
 verde = "\u001B[32m"
-amarelo = "\u001B[33m"
+amarelo = "\33[1;93m"
 azul = "\u001B[34m"
 magenta = "\u001B[35m"
 cyan = "\u001B[36m"
@@ -64,13 +78,26 @@ class DataBase:
 	def closed(self):
 			self.cursor.close()
 			self.conn.close()
-			
+
+print(f"{loadingLogo()}")
+carregamento()
+print(f"{amarelo} [*] Bem - vindo (a) a pizzaria Bom Gosto. Espero que goste ! {reseta}")
+#prompt 
+prompt = f"""
+Escolha uma opção : 
+1) Entrar
+2) Fazer Cadastro
+3) Sair
+
+Opcção  {magenta} Escolhida {reseta} : """
+escolha = int(input(prompt))
+print(escolha)
 #teste 	
-db = DataBase("mydb.db")
+"""db = DataBase("mydb.db")
 db.insert_data("Mateus", "82 10212-2121", "namdaw32")
 db.select_from()
 db.closed()
-
+"""
 
 
 
